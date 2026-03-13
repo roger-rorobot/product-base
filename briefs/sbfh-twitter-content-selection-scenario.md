@@ -1,99 +1,111 @@
-# Understand It Brief: SBFH Twitter Content Selection Experience
+# SBFH Twitter Content Selection and Management
 
-**Date:** 2026-03-13  
-**Author:** Product Agent  
-**Scenario Owner:** SBFH  
-**Trigger:** Odoo Card #40400000005
+## Problem or Opportunity
 
----
+SBFH (Small Business Founder/Owner) needs to share content on Twitter to gain visibility and engagement, but faces significant pain points during content selection and publishing:
 
-## Problem Statement
+1. **Poor visual feedback when selecting content**: Unable to see thumbnails properly (especially for iOS Live Photos which show a large play icon instead), making it difficult to identify the right content.
+2. **Cumbersome multi-step editing**: The editor only allows one edit step at a time, requiring users to save after each operation and refresh to see results.
+3. **Lack of file tracking and history**: After edits and operations, users lose track of which files they've uploaded or published.
+4. **No persistent favorites system**: Users discover favorites only after the fact, with no integrated workflow to mark content for future use.
 
-SBFH (content manager) wants to share engaging content on Twitter to maximize visibility and engagement, but the current Nextcloud experience creates significant friction in identifying, selecting, and preparing the right assets for publishing.
+## Who benefits
 
-## User & Context
+- **Small business owners/managers** who need to regularly publish social media content
+- **Content marketers** managing multiple assets across platforms
+- **Users with iOS devices** who rely on Live Photos and need better visual previews
+- **Anyone who needs to quickly identify, edit, and publish engaging content**
 
-- **Primary User:** SBFH (content manager)
-- **Goal:** Publish Twitter content that has potential to go viral and fits the brand story
-- **Current Tool:** Nextcloud (with embedded editing capabilities)
-- **Content Type:** Images, including iOS Live Photos
+## Why this matters
 
-## Key Pain Points (Observed)
+Solving these issues will:
+- **Reduce cognitive load** and time spent selecting content for social media
+- **Prevent data loss anxiety** by providing immediate visual feedback and clear file status
+- **Enable efficient multi-step editing** workflows without intermediate saves
+- **Improve content performance** by making it easier to identify and select high-potential content
+- **Provide auditability** so users know exactly what they've published
 
-### 1. Discovery & Selection Friction
-- **Live Photo Preview Issue:** iOS Live Photos display a large play icon instead of thumbnails, preventing quick visual scanning
-- **Comparison Difficulty:** User must switch back and forth between similar images to evaluate options
-- **Decision Paralysis:** Uncertainty about which image will resonate most ("He thinks which one of these pictures will buzz?")
+## Desired outcomes
 
-### 2. Editing Limitations
-- **Linear Workflow Only:** Can only apply one edit step at a time (e.g., rotate → save → crop as separate steps)
-- **No Visual Feedback:** Edit outputs are not visible until page refresh
-- **Mental Model Break:** User fears losing files ("Where's my file????") during multi-step edits
-- **State Management:** Need to save intermediate versions manually
+1. **Faster content selection**: Users can quickly browse and identify suitable content through improved visual previews (thumbnails for regular photos, proper live photo handling).
+2. **Seamless multi-step editing**: Users can apply multiple edits in sequence without intermediate saves or page refreshes, with all changes visible in real-time.
+3. **Clear content tracking**: Users can immediately see what content has been uploaded/published and maintain a record of their publishing history.
+4. **Better content discovery**: Integrated "Favorite" functionality allows users to flag promising content early in the workflow.
 
-### 3. Asset Tracking & Audit
-- **Download Confusion:** After selecting and downloading multiple files, user cannot recall which ones were chosen ("I just uploaded two of these but i don't even know which ones anymore?")
-- **No Version/Selection History:** No clear audit trail of selected/downloaded assets
+## Success metrics
 
-## Opportunity
+- **Selection time reduction**: 50% reduction in time spent browsing and selecting content for Twitter
+- **Edit completion rate**: 100% of multi-step edit sequences completed without user-perceived data loss
+- **Published content tracking**: 90% of users can correctly identify what content they've published within 5 minutes
+- **Live photo preview success rate**: 100% of Live Photos display appropriate preview (not just play icon)
 
-Build a streamlined content curation workflow for Twitter that enables:
-1. **Better Visual Discovery:** Proper thumbnail rendering for all image types (including Live Photos)
-2. **Multi-Image Comparison:** Side-by-side or carousel view for rapid comparison
-3. **Non-Destructive Multi-Step Editing:** Preview edit results in real-time without page refresh
-4. **File State Assurance:** Clear visual feedback that files are preserved during editing
-5. **Selection Tracking:** Persistent tracking of selected/downloaded assets with ability to review choices
+## Proposed approach
 
-## Success Metrics
+1. **Enhanced preview system**: Implement thumbnail generation for all image types, with special handling for iOS Live Photos to show representative frames rather than just a play icon.
 
-- **Selection Time:** Reduce time from opening folder to selecting final assets
-- **Edit Abandonment:** Decrease fear-related drops during multi-step editing
-- **Asset Clarity:** User can recall which files were selected within 1 hour post-selection (reduction in confusion)
-- **Publication Confidence:** User reports higher confidence that chosen content fits viral potential
+2. **Multi-step editing with live preview**: Allow users to queue multiple edit operations (rotate, crop, filter, etc.) and see the cumulative result in real-time without intermediate saves. Only save upon final confirmation.
 
-## Scope
+3. **File status and history tracking**: Add a persistent view showing:
+   - Recent uploads and their status (published, scheduled, draft)
+   - Edit history for each file
+   - Favorites marked for quick access
 
-### In Scope (for MVP)
-- Thumbnail rendering improvements for iOS Live Photos
-- Side-by-side image comparison view
-- Real-time preview of edit operations
-- Visual indicators that edited files are preserved
-- Simple selection history/tracking view
+4. **Integrated favorites workflow**: Make the "Favorite" button visible and accessible from the beginning of the workflow, not as a discovery feature.
 
-### Out of Scope (for now)
-- Viral prediction algorithms
-- Full social media scheduling integration
-- Advanced collaborative editing
+## Stakeholders
+
+- **Product team**: Owner of content management features
+- **Engineering team**: Implementation of editing and preview improvements
+- **Design team**: UX improvements for visual browsing and editing
+- **Customer Success**: Supporting users during transition
+- **SBFH users**: Primary beneficiaries
+
+## Dependencies and blockers
+
+- **Dependencies**:
+  - iOS Live Photo handling from media library team
+  - Backend support for persistent edit session state
+  - Frontend improvements to preview rendering
+  - Database schema updates for favorites and publishing history
+  
+- **Blockers**:
+  - Current editor architecture limitations requiring page refreshes
+  - No existing thumbnail generation pipeline for Live Photos
+  - Lack of centralized content state tracking
+
+## Complexity
+
+High ⚖️ Detailed rationale: This involves multiple subsystems (media preview, editing engine, file state management, user history tracking) and requires coordinated changes across frontend and backend. The editing workflow change is particularly complex as it requires stateful session management.
+
+## Next steps
+
+1. Conduct user research to validate specific pain points with current workflow
+2. Design mockups for improved preview and editing interfaces
+3. Technical spike on multi-step editing architecture
+4. Prioritize Live Photo thumbnail fix as quick win
+5. Define API contracts for content state tracking
 
 ## Assumptions
 
-1. The "Nextcloud" environment supports custom UI components or integrations for the product team to build upon
-2. iOS Live Photos are a significant portion of the user's content library
-3. Twitter is the primary publishing channel for this user segment
-4. The user has moderate technical comfort but values speed and certainty over granular control
+- The "SBFH" user persona represents small business owners managing their own social media
+- iOS Live Photos represent a significant portion of user content (based on the user's complaint)
+- Users are currently using Nextcloud as their content management platform
+- The current editor is a Nextcloud app with single-operation limitation
+- Twitter publishing is the primary use case but improvements should benefit other platforms
+- Users have basic image editing needs (rotate, crop, filter) rather than advanced editing
 
-## Open Questions
+## Open questions
 
-1. What is the typical batch size of images users evaluate before publishing to Twitter?
-2. What edit operations are most commonly requested (crop, rotate, filters, etc.)?
-3. Is this a one-time content manager (SBFH) or are there multiple users with similar needs?
-4. Are there existing metrics on Live Photo adoption rates in the user base?
-5. What is the current file format compatibility with Twitter's upload requirements?
+1. What other platforms beyond Twitter need to be supported?
+2. Are there specific Live Photo handling requirements from iOS/Apple guidelines?
+3. What is the expected scale of users who perform multi-step edits?
+4. Should edit history be version-controlled (allowing rollback) or just sequential?
+5. What integration points exist with Twitter's publishing API?
 
-## Next Steps
+## Quality bar
 
-1. **Research:** Validate pain points with additional users (target: 5-8 content managers)
-2. **Design:** Create low-fidelity mockups for improved thumbnail display and multi-step editing
-3. **Prototype:** Build a quick prototype for Live Photo thumbnail rendering
-4. **Testing:** Conduct usability tests comparing current vs. proposed workflows
-5. **Roadmap:** Define MVP feature set and timeline
-
-## References
-
-- Odoo Card #40400000005 (original trigger)
-- Product Repository: roger-rorobot/product-base
-
----
-
-**Status:** Draft - Ready for stakeholder review  
-**Priority:** High (directly impacts user ability to publish content)
+A good answer is:
+- Grounded in the provided context of user pain points
+- Useful without being overly speculative about technical implementation
+- Explicit about the multi-system nature of the solution
+- Structured so it can be stored directly in the product repo as an actionable brief
